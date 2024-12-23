@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Extraction and QA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload Image for Table Extraction and Question Answering</h1>
+
+        <!-- File Upload Form -->
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="files" required>
+            <button type="submit">Upload</button>
+        </form>
+        
+
+        {% if extracted_text %}
+        <h2>Extracted Table Text:</h2>
+        <pre>{{ extracted_text }}</pre>
+
+        <!-- Question Asking Form -->
+        <h2>Ask a Question:</h2>
+        <form action="/ask" method="POST">
+            <label for="question">Your Question:</label>
+            <input type="text" id="question" name="question" required>
+            <button type="submit">Ask</button>
+        </form>
+        {% endif %}
+
+        {% if question and answer %}
+        <h2>Question:</h2>
+        <p>{{ question }}</p>
+        <h2>Answer:</h2>
+        <p>{{ answer }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
